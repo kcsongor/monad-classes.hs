@@ -38,7 +38,7 @@ instance MonadState s m => MonadReaderN Zero s (ReadStateT s m) where
 instance MonadBase b m => MonadBase b (ReadStateT x m) where
   liftBase = lift . liftBase
 
-instance MonadTransControl (ReadStateT x) where
+instance MonadTransControl (ReadStateT s) where
   type StT (ReadStateT s) a = StT IdentityT a
   liftWith = defaultLiftWith ReadStateT (\(ReadStateT a) -> a)
   restoreT = defaultRestoreT ReadStateT
